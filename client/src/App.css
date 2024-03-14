@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  /* height: 100%; */
+}
+
+.dark-theme {
+  /* Dark theme styles */
+  background-color: #374151;
+  color: white;
+}
+
+.light-theme {
+  /* Light theme styles */
+  background-color: #dcdcdc;
+}

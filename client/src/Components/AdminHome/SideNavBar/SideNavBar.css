@@ -1,0 +1,9 @@
+@import "rsuite/dist/rsuite.css";
+.sidenav {
+  .rs-sidenav-item {
+    background-color: white;
+  }
+}
+.rs-sidenav {
+  background-color: white;
+}

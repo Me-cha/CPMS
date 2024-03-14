@@ -1,0 +1,9 @@
+@import "rsuite/dist/rsuite.css";
+.expanded-show-container {
+  display: block; /* Display the container */
+  width: 100%; /* Set the width to 100% */
+}
+.show-container {
+  display: block;
+  width: 100%; /* Set the width to 100% */
+}

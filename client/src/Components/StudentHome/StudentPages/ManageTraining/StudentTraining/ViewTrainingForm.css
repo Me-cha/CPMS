@@ -1,0 +1,15 @@
+.tableInputValues {
+  input {
+    text-align: right !important;
+  }
+}
+.react-datepicker__input-container {
+  input {
+    padding-right: 1vw;
+    text-align: right;
+    width: 7vw;
+    height: 7vh;
+    border: 1.5px solid #d3d3d3;
+    border-radius: 7px;
+  }
+}

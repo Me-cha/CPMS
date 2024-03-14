@@ -1,0 +1,31 @@
+.sc-hLBbgP {
+  input {
+    padding-left: 30px !important;
+  }
+  span {
+    padding-left: 10px !important;
+  }
+}
+
+.searchbox {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  .jifbFL {
+    width: 40vw;
+    padding: 0.2em;
+    .react-search-box-dropdown {
+      position: absolute;
+      z-index: 1000;
+      margin-top: 3em;
+      height: 50vh !important;
+      width: 19vw !important;
+      overflow-y: auto !important;
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      scrollbar-width: none;
+    }
+  }
+}

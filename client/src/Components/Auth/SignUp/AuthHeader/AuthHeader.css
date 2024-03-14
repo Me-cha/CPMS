@@ -1,0 +1,71 @@
+/* navbar.css */
+
+/* Mobile menu button */
+.disclosure-button {
+  @apply inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white;
+}
+
+/* Navigation links */
+.nav-link {
+  @apply px-3 py-2 rounded-md text-sm font-medium;
+}
+
+/* Active navigation link */
+.nav-link.active {
+  @apply bg-gray-900 text-white;
+}
+
+/* Inactive navigation link hover */
+.nav-link:hover {
+  @apply text-gray-300 hover:bg-gray-700 hover:text-white;
+}
+
+/* Notifications button */
+.notifications-button {
+  @apply bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white;
+}
+
+/* Profile dropdown button */
+.profile-dropdown-button {
+  @apply bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white;
+}
+
+/* Profile image */
+.profile-image {
+  @apply h-8 w-8 rounded-full;
+}
+
+/* Profile dropdown menu */
+.profile-dropdown-menu {
+  @apply origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+}
+
+/* Profile dropdown menu items */
+.profile-dropdown-item {
+  @apply block px-4 py-2 text-sm text-gray-700;
+}
+
+/* Active profile dropdown item */
+.profile-dropdown-item.active {
+  @apply bg-gray-100;
+}
+
+/* Panel for small screens */
+.disclosure-panel {
+  @apply px-2 pt-2 pb-3 space-y-1;
+}
+
+/* Panel navigation link */
+.panel-nav-link {
+  @apply block px-3 py-2 rounded-md text-base font-medium;
+}
+
+/* Active panel navigation link */
+.panel-nav-link.active {
+  @apply bg-gray-900 text-white;
+}
+
+/* Inactive panel navigation link hover */
+.panel-nav-link:hover {
+  @apply text-gray-300 hover:bg-gray-700 hover:text-white;
+}

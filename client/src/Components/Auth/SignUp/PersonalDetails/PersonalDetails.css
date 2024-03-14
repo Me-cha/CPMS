@@ -1,0 +1,21 @@
+.StudentDetailsForm {
+  height: auto;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.StudentDetailsForm-items {
+  display: flex;
+  flex-direction: row;
+}
+
+#boardMarks {
+  display: flex;
+  flex-direction: column;
+}
+
+#collegeInfo {
+  display: flex;
+  flex-direction: column;
+}
