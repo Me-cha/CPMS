@@ -15,6 +15,6 @@ router.get("/getalljobs", allJobPosts);
 router.get("/getonejob/:id", oneJobPost);
 router.patch("/updatejobpost/:id", updateJobPost);
 router.delete("/deletejobpost/:id", deleteJobPost);
-router.get("/allappliedstudents/:id", allAppliedStudents);
+
 
 module.exports = router;
