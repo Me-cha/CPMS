@@ -1,6 +1,5 @@
 const User = require("../models/user.model");
 
-
 //Students CRUD:
 const getStudentDetails = async (req, res) => {
   try {
@@ -73,4 +72,5 @@ module.exports = {
   getStudent,
   updateStudent,
   deleteStudent,
+
 };

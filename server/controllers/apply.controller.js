@@ -60,7 +60,7 @@ const withdrawApply = async (req,res) => {
 
 const getAppliedStudents = async (req, res) => {
   try {
-    const jobId = req.params.jobId; // Assuming the parameter name is 'jobId'
+    const jobId = req.params.jobId; 
 
    
     const result = await Jobpost.aggregate([
@@ -71,7 +71,7 @@ const getAppliedStudents = async (req, res) => {
       },
       {
         $lookup: {
-          from: "users", // The collection name of User model
+          from: "users", 
           localField: "candidates.uid",
           foreignField: "uid",
           as: "appliedStudents"
@@ -79,14 +79,18 @@ const getAppliedStudents = async (req, res) => {
       },
       {
         $project: {
-          _id: 0, // Exclude _id field
+          _id: 0, 
           company_name: 1,
           appliedStudents: {
             name: 1,
             batch: 1,
             branch: 1,
             college_email: 1,
-            
+            avg_cgpa: 1,
+            ssc_marks: 1,
+            hsc_marks: 1,
+            resume_url: 1,
+            linkedln_link:1
           }
         }
       }
