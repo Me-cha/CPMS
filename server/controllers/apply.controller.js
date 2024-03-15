@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const Jobpost = require("../models/jobPost.model");
 
 const oneClickApply = async (req, res) => {
@@ -56,4 +57,50 @@ const withdrawApply = async (req,res) => {
   }
 
 }
-module.exports = { oneClickApply, withdrawApply };
+
+const getAppliedStudents = async (req, res) => {
+  try {
+    const jobId = req.params.jobId; // Assuming the parameter name is 'jobId'
+
+   
+    const result = await Jobpost.aggregate([
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(jobId)
+        }
+      },
+      {
+        $lookup: {
+          from: "users", // The collection name of User model
+          localField: "candidates.uid",
+          foreignField: "uid",
+          as: "appliedStudents"
+        }
+      },
+      {
+        $project: {
+          _id: 0, // Exclude _id field
+          company_name: 1,
+          appliedStudents: {
+            name: 1,
+            batch: 1,
+            branch: 1,
+            college_email: 1,
+            
+          }
+        }
+      }
+    ]);
+    
+    if (result.length === 0) {
+      return res.status(404).json({ success: false, message: "No job post found" });
+    }
+
+    res.status(200).json({ success: true, appliedStudents: result[0].appliedStudents });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+module.exports = { oneClickApply, withdrawApply, getAppliedStudents};
