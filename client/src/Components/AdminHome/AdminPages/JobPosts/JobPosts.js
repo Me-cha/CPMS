@@ -22,10 +22,10 @@ export default function AdminJobPosts() {
   };
 
   return (
-    <div className="jobPost w-[75vw]">
+    <div className="jobPost w-[80vw]" style={{ margin: "auto" }}>
       <h1 style={{ textAlign: "center", marginBottom: "1vh" }}>Job Posts</h1>
       <Box sx={{ bgcolor: "background.paper" }}>
-        <Stack direction="row" spacing={{ md: 108, sm: 40 }}>
+        <Stack direction="row" spacing={{ md: 90, sm: 6 }}>
           <Tabs value={value} onChange={handleChange}>
             <Tab
               label="Applications"
@@ -33,12 +33,12 @@ export default function AdminJobPosts() {
               to="applicationList"
               style={{ textDecoration: "none" }}
             />
-            {/*    <Tab
-          label="New Application"
-            component={Link}
-            to="applicationForm"
-            style={{ textDecoration: "none" }}
-          /> */}
+            <Tab
+              label="Manage Jobs"
+              component={Link}
+              to="manageJobs"
+              style={{ textDecoration: "none" }}
+            />
           </Tabs>
           <Fab
             variant="extended"

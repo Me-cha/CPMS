@@ -113,3 +113,49 @@ export const updateJobAction = (jobData) => async (dispatch) => {
     dispatch({ type: "UPDATE_JOB_ERROR", error: error.message });
   }
 };
+
+export const applyJobAction = (uid, jobId) => async (dispatch) => {
+  try {
+    const response = await axios.post(`${URL}/api/application/job/apply`, {
+      uid,
+      job_id: jobId,
+    });
+
+    if (response.status === 200) {
+      dispatch({
+        type: "APPLY_JOB",
+        payload: response.data.result,
+      });
+      alert("Applied successfully");
+    } else {
+      dispatch({ type: "APPLY_JOB_ERROR", error: response.data.message });
+      alert("try again");
+    }
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: "APPLY_JOB_ERROR", error: error.message });
+  }
+};
+
+export const getCandidates = (jobId) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${URL}/api/jobs/allappliedstudents/${jobId}`
+    );
+
+    if (response.status === 200) {
+      dispatch({
+        type: "APPLIED_CANDIDATES",
+        payload: response.data.result,
+      });
+    } else {
+      dispatch({
+        type: "APPLY_CANDIDATES_ERROR",
+        error: response.data.message,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: "APPLY_CANDIDATES_ERROR", error: error.message });
+  }
+};

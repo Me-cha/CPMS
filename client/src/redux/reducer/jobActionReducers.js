@@ -1,5 +1,6 @@
 const initialState = {
   jobs: [],
+  candidates: [],
 };
 
 const jobActionReducers = (state = initialState, action) => {
@@ -27,6 +28,27 @@ const jobActionReducers = (state = initialState, action) => {
         ),
       };
     case "UPDATE_JOB_ERROR":
+      return {
+        ...state,
+        error: action.error,
+      };
+    case "APPLY_JOB":
+      return {
+        ...state,
+        error: action.error,
+      };
+    case "APPLY_JOB_ERROR":
+      return {
+        ...state,
+        error: action.error,
+      };
+    case "APPLIED_CANDIDATES":
+      return {
+        ...state,
+        candidates: action.payload,
+        error: null,
+      };
+    case "APPLY_CANDIDATES_ERROR":
       return {
         ...state,
         error: action.error,

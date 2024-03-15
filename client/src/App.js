@@ -27,6 +27,8 @@ import ViewApplication from "./Components/StudentHome/StudentPages/JobPosts/View
 import StudentTrainings from "./Components/StudentHome/StudentPages/ManageTraining/StudentTraining";
 import StudentTrainingList from "./Components/StudentHome/StudentPages/ManageTraining/StudentTrainingList/StudentTrainingList";
 import ViewTrainingForm from "./Components/StudentHome/StudentPages/ManageTraining/StudentTraining/ViewTrainingForm";
+import ManageJobs from "./Components/AdminHome/AdminPages/JobPosts/manageApplication/ManageApplicationList";
+import ManageApplication from "./Components/AdminHome/AdminPages/JobPosts/manageApplication/ManageApplication";
 
 function App() {
   const [isDarkMode, setDarkMode] = useState(() => {
@@ -106,9 +108,11 @@ function App() {
 
           <Route path="adminJobPosts" element={<AdminJobPosts />}>
             <Route path="applicationList" element={<ApplicationList />} />
+            <Route path="manageJobs" element={<ManageJobs />} />
           </Route>
           <Route path="applicationForm" element={<ApplicationForm />} />
           <Route path="updateApplication" element={<UpdateApplication />} />
+          <Route path="manageApplication" element={<ManageApplication />} />
 
           <Route path="adminStudentList" element={<AdminStudentList />} />
           <Route path="adminTrainings" element={<AdminManageTrainings />}>

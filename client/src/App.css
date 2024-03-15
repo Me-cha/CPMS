@@ -18,5 +18,6 @@ body {
 
 .light-theme {
   /* Light theme styles */
-  background-color: #dcdcdc;
+  /* background-color: #dcdcdc; */
+  background-color: white;
 }

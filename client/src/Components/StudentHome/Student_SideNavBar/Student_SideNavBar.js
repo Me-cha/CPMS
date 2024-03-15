@@ -10,7 +10,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Disclosure } from "@headlessui/react";
 import { Link } from "react-router-dom";
 
-const StudentSideNavBar = ({ expanded, toggleMenu }) => {
+const StudentSideNavBar = ({ expanded }) => {
   const NavLink = React.memo(
     React.forwardRef(({ href, children, ...rest }, ref) => (
       <Link ref={ref} to={href} {...rest}>
@@ -25,16 +25,6 @@ const StudentSideNavBar = ({ expanded, toggleMenu }) => {
         <Sidenav.Header>
           <Disclosure>
             <div className="flex items-center pb-1  bg-white ">
-              <Disclosure.Button
-                className="inline-flex items-center justify-center   text-gray-400 hover:ring-2 hover:ring-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-inset h-[40px] w-[55px] mt-1 "
-                onClick={toggleMenu}
-              >
-                {expanded ? (
-                  <XIcon className="block h-8 w-10" aria-hidden="true" />
-                ) : (
-                  <MenuIcon className="block h-8 w-12 " aria-hidden="true" />
-                )}
-              </Disclosure.Button>
               <div
                 style={{
                   // width: "2vw",
