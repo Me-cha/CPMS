@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, List } from "rsuite";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { getCandidates } from "../../../../../redux/action/jobActions";
@@ -8,17 +8,25 @@ import { getCandidates } from "../../../../../redux/action/jobActions";
 const { Column, HeaderCell, Cell } = Table;
 
 const ManageApplication = () => {
+  const candidates = useSelector(
+    (state) => state.jobActions.candidates.appliedStudents
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const jobID = location.state ? location.state.jobId : {};
   const [studentData, setStudentData] = useState([]);
-
   useEffect(() => {
     if (jobID) {
       dispatch(getCandidates(jobID));
+      const updatedCandidates = candidates.appliedStudents.map((student) => ({
+        ...student,
+        candidate_status: candidates.candidate_status,
+      }));
+      setStudentData(updatedCandidates);
     }
-  }, [dispatch, jobID]);
+  }, [dispatch, jobID, candidates]);
+  console.log("ap", studentData);
 
   const handleBack = () => {
     navigate(-1);
@@ -53,7 +61,7 @@ const ManageApplication = () => {
             <Cell dataKey="uid" />
           </Column>
 
-          <Column width={200}>
+          <Column width={150}>
             <HeaderCell>NAME</HeaderCell>
             <Cell dataKey="name" />
           </Column>
@@ -68,18 +76,14 @@ const ManageApplication = () => {
             <Cell dataKey="branch" />
           </Column>
 
-          <Column width={100}>
-            <HeaderCell>CONTACT</HeaderCell>
-            <Cell>
-              {(rowData) => {
-                return String(rowData.contact);
-              }}
-            </Cell>
-          </Column>
-
-          <Column width={200}>
+          <Column width={300}>
             <HeaderCell>COLLEGE EMAIL</HeaderCell>
             <Cell dataKey="college_email" />
+          </Column>
+
+          <Column width={120}>
+            <HeaderCell>Application Status</HeaderCell>
+            <Cell dataKey="candidate_status" />
           </Column>
         </Table>
       </div>

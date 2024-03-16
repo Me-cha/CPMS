@@ -140,13 +140,17 @@ export const applyJobAction = (uid, jobId) => async (dispatch) => {
 export const getCandidates = (jobId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `${URL}/api/jobs/allappliedstudents/${jobId}`
+      `${URL}/api/application/job/appliedstudents/${jobId}`
     );
-
+    console.log(response.data);
     if (response.status === 200) {
       dispatch({
         type: "APPLIED_CANDIDATES",
-        payload: response.data.result,
+        payload: {
+          appliedStudents: response.data.appliedStudents,
+          companyName: response.data.company_name,
+          candidateStatus: response.data.candidate_status,
+        },
       });
     } else {
       dispatch({
@@ -155,7 +159,6 @@ export const getCandidates = (jobId) => async (dispatch) => {
       });
     }
   } catch (error) {
-    console.error(error);
     dispatch({ type: "APPLY_CANDIDATES_ERROR", error: error.message });
   }
 };

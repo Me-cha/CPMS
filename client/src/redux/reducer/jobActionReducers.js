@@ -46,7 +46,6 @@ const jobActionReducers = (state = initialState, action) => {
       return {
         ...state,
         candidates: action.payload,
-        error: null,
       };
     case "APPLY_CANDIDATES_ERROR":
       return {
