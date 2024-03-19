@@ -1,30 +1,74 @@
 const mongoose = require('mongoose')
 const Jobpost = require("../models/jobPost.model");
+const User = require("../models/user.model");
+const Training = require('../models/training.model')
+
 
 const oneClickApply = async (req, res) => {
   try {
-    const { uid,job_id } = req.body;
+    const { uid,job_id, training_id } = req.body;
 
-    const jobPost = await Jobpost.findOne({ _id: job_id });
-
-    if (!jobPost) {
-      return res.status(404).json({ error: "Job post not found" });
+    if (!job_id && !training_id) {
+      return res.status(400).json({ error: "Job or training ID is required" });
     }
 
-    const isAlreadyApplied = jobPost.candidates.some(
-      (candidate) => candidate.uid === uid
-    );
+    if(job_id){
+      const jobPost = await Jobpost.findOne({ _id: job_id });
 
-    if (isAlreadyApplied) {
-      return res.status(400).json({ error: "Student already applied" });
+      const isAlreadyApplied = jobPost.candidates.some(
+        (candidate) => candidate.uid === uid
+      );
+
+      if (isAlreadyApplied) {
+        return res.status(400).json({ error: "Student already applied" });
+      }
+  
+      jobPost.candidates.push({
+        uid: uid,
+        timestamp: new Date(),
+      });
+      
+      await jobPost.save();
+
+      await User.findOneAndUpdate(
+        { uid },
+        { $addToSet: { applications: { job_id: job_id } } },
+        { new: true }
+      );
     }
+    
 
-    jobPost.candidates.push({
-      uid: uid,
-      timestamp: new Date(),
-    });
+    if (training_id) {
+      const training = await Training.findOne({ _id: training_id });
 
-    const data = await jobPost.save();
+      if (!training) {
+        return res.status(404).json({ error: "Training not found" });
+      }
+
+      // Check if the user is already applied for this training
+      const isAlreadyApplied = training.attendees.some(
+        (attendee) => attendee.uid === uid );
+
+      if (isAlreadyApplied) {
+        return res.status(400).json({ error: "Student already applied for this training" });
+      }
+
+      // Add the user to the applicants array of the training
+      training.attendees.push({
+        uid: uid,
+        timestamp: new Date(),
+      });
+
+      await training.save();
+
+
+      await User.findOneAndUpdate(
+        { uid },
+        { $addToSet: { trainingApplications: { training_id: training_id } } },
+        { new: true }
+      );
+      
+    }
 
     res.status(200).json({ success: true, message: "Successfully Applied" });
   } catch (error) {
@@ -36,9 +80,11 @@ const oneClickApply = async (req, res) => {
 };
 
 const withdrawApply = async (req,res) => {
-  const {job_id,uid} = req.body;
+  const {job_id,uid, training_id} = req.body;
   try {
-    const jobPost = await Jobpost.findOne({_id: job_id });
+
+    if(job_id){
+      const jobPost = await Jobpost.findOne({_id: job_id });
 
     if (!jobPost) {
       return res.status(404).json({ error: "Job post not found" });
@@ -46,11 +92,25 @@ const withdrawApply = async (req,res) => {
 
     jobPost.candidates.splice(jobPost.candidates.map(candidate => candidate.uid).indexOf(uid),1);
 
-    const data = await jobPost.save();
+     await jobPost.save();
+    }
+
+    if(training_id){
+      const training = await Training.findOne({_id: training_id});
+      
+      if (!training) {
+        return res.status(404).json({ error: "Training post not found" });
+      }
+
+    training.attendees.splice(training.attendees.map(attendee => attendee.uid).indexOf(uid),1)
+    await training.save();
+    }
+    
     res.status(200).json({success: true, message: "Application withdrawn."})
     
 
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
       .json({ err: error, message: "Internal server error!" });
@@ -60,19 +120,30 @@ const withdrawApply = async (req,res) => {
 
 const getAppliedStudents = async (req, res) => {
   try {
-    const jobId = req.params.jobId; 
+    const { applicationType, id } = req.params; 
+    
+    let model;
+    let localField = '';
+    if (applicationType === 'job') {
+      model = Jobpost;
+      localField = 'candidates.uid';
+    } else if (applicationType === 'training') {
+      model = Training;
+      localField = 'applicants';
+    } else {
+      return res.status(400).json({ success: false, message: "Invalid application type" });
+    }
 
-   
-    const result = await Jobpost.aggregate([
+    const result = await model.aggregate([
       {
         $match: {
-          _id: new mongoose.Types.ObjectId(jobId)
+          _id: new mongoose.Types.ObjectId(id)
         }
       },
       {
         $lookup: {
           from: "users", 
-          localField: "candidates.uid",
+          localField: localField,
           foreignField: "uid",
           as: "appliedStudents"
         }
@@ -90,21 +161,23 @@ const getAppliedStudents = async (req, res) => {
             ssc_marks: 1,
             hsc_marks: 1,
             resume_url: 1,
-            linkedln_link:1
+            linkedln_link: 1
           }
         }
       }
     ]);
     
     if (result.length === 0) {
-      return res.status(404).json({ success: false, message: "No job post found" });
+      return res.status(404).json({ success: false, message: `No ${applicationType} post found` });
     }
 
-    res.status(200).json({ success: true, appliedStudents: result[0].appliedStudents });
+    res.status(200).json({ success: true, appliedStudents: result[0]});
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
+
 
 module.exports = { oneClickApply, withdrawApply, getAppliedStudents};
