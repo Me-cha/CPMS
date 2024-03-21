@@ -29,6 +29,7 @@ import StudentTrainingList from "./Components/StudentHome/StudentPages/ManageTra
 import ViewTrainingForm from "./Components/StudentHome/StudentPages/ManageTraining/StudentTraining/ViewTrainingForm";
 import ManageJobs from "./Components/AdminHome/AdminPages/JobPosts/manageApplication/ManageApplicationList";
 import ManageApplication from "./Components/AdminHome/AdminPages/JobPosts/manageApplication/ManageApplication";
+import StudentDetails from "./Components/StudentHome/StudentPages/StudentDetails/StudentDetails";
 
 function App() {
   const [isDarkMode, setDarkMode] = useState(() => {
@@ -154,7 +155,7 @@ function App() {
           </Route>
           <Route path="student_ViewApplication" element={<ViewApplication />} />
 
-          <Route path="student_StudentList" element={<AdminStudentList />} />
+          <Route path="student_StudentList" element={<StudentDetails />} />
           <Route path="student_Trainings" element={<StudentTrainings />}>
             <Route
               path="student_trainingList"

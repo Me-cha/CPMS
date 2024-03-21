@@ -28,7 +28,7 @@ function Navbar({ toggleDarkMode, isDarkMode, setLogin, toggleMenu }) {
   const handleLogout = () => {
     dispatch(logoutAction(setLogin, navigate));
   };
-  const user = useSelector((state) => state.auth.data.result);
+  const user = useSelector((state) => state.auth.data);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);

@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   Box,
@@ -12,12 +12,13 @@ import {
 import { applyJobAction } from "../../../../../redux/action/jobActions";
 
 function ApplyJobPost({ deadline, jobId }) {
+  const [isApplied, setIsApplied] = useState(false);
   const user = JSON.parse(localStorage.getItem("Profile"));
   const uid = user?.uid;
   const dispatch = useDispatch();
 
   const handleApply = () => {
-    dispatch(applyJobAction(uid, jobId));
+    dispatch(applyJobAction(uid, jobId, setIsApplied));
   };
 
   return (
@@ -36,14 +37,25 @@ function ApplyJobPost({ deadline, jobId }) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button
-            size="large"
-            variant="contained"
-            fullWidth
-            onClick={handleApply}
-          >
-            Apply
-          </Button>
+          {isApplied ? (
+            <Button
+              size="large"
+              variant="contained"
+              fullWidth
+              onClick={handleApply}
+            >
+              Apply
+            </Button>
+          ) : (
+            <Button
+              size="large"
+              variant="contained"
+              fullWidth
+              onClick={handleApply}
+            >
+              Apply
+            </Button>
+          )}
         </CardActions>
       </Card>
     </Box>

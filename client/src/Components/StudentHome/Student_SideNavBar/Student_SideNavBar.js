@@ -6,9 +6,8 @@ import GroupIcon from "@rsuite/icons/legacy/Group";
 import TaskIcon from "@rsuite/icons/Task";
 import BriefcaseIcon from "@rsuite/icons/legacy/Briefcase";
 import GearIcon from "@rsuite/icons/Gear";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Disclosure } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const StudentSideNavBar = ({ expanded }) => {
   const NavLink = React.memo(
@@ -18,6 +17,9 @@ const StudentSideNavBar = ({ expanded }) => {
       </Link>
     ))
   );
+
+  const location = useLocation();
+  const path = location.pathname.split("/studentHome/")[1];
 
   return (
     <div className="sideNavBar h-[91vh] ">
@@ -44,6 +46,7 @@ const StudentSideNavBar = ({ expanded }) => {
               href="studentDashboard"
               eventKey="1"
               icon={<DashboardIcon />}
+              active={path === "studentDashboard"}
             >
               DASHBOARD
             </Nav.Item>
@@ -52,6 +55,7 @@ const StudentSideNavBar = ({ expanded }) => {
               href="studentJobPosts/student_applicationList"
               eventKey="2"
               icon={<BriefcaseIcon />}
+              active={path === "studentJobPosts/student_applicationList"}
             >
               JOBS
             </Nav.Item>
@@ -60,6 +64,7 @@ const StudentSideNavBar = ({ expanded }) => {
               href="student_Trainings/student_trainingList"
               eventKey="3"
               icon={<TaskIcon />}
+              active={path === "student_Trainings/student_trainingList"}
             >
               TRAININGS
             </Nav.Item>
@@ -68,6 +73,7 @@ const StudentSideNavBar = ({ expanded }) => {
               href="student_StudentList"
               eventKey="4"
               icon={<GroupIcon />}
+              active={path === "student_StudentList"}
             >
               STUDENTS
             </Nav.Item>
@@ -76,6 +82,7 @@ const StudentSideNavBar = ({ expanded }) => {
               href="student_Settings"
               eventKey="5"
               icon={<GearIcon />}
+              active={path === "student_Settings"}
             >
               SETTINGS
             </Nav.Item>

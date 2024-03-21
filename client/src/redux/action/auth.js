@@ -35,13 +35,16 @@ export const loginAction =
         dispatch({
           type: "AUTH",
           payload: {
-            ...response.data,
+            ...response.data.result,
             select: loginCredentials.select, // Use the select from loginCredentials
             email: loginCredentials.email, // Use the email from loginCredentials
             password: loginCredentials.password, // Use the password from loginCredentials
           },
         });
-        localStorage.setItem("Profile", JSON.stringify({ ...response.data }));
+        localStorage.setItem(
+          "Profile",
+          JSON.stringify({ ...response.data.result })
+        );
         if (loginCredentials.select === "student") {
           navigate("/studentHome/studentDashboard");
         } else {
