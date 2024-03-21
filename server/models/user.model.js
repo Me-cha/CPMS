@@ -34,6 +34,27 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  applications: [{
+    job_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'JobPost', 
+    },
+    timestamp: {
+      type: Date,
+      default: Date.now
+    }
+}],
+
+trainingApplications: [{
+  training_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Training', 
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now
+  }
+}] ,
 
   isAdmin: {
     type: Boolean,

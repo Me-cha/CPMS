@@ -68,16 +68,19 @@ const trainingSchema = new mongoose.Schema({
 
     // Attendees
     attendees: [{
-        // You might store user IDs or other identifiers here
-        userId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-        },
+       uid:{
+        type: String,
+        default: "",
+       },
         attendanceStatus: {
             type: String,
             enum: ['Present', 'Absent', 'Not Marked'],
             default: 'Not Marked',
         },
+        timestamp: {
+            type: Date,
+            default: Date.now,
+        }
     }],
 
     // Timestamps
