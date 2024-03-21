@@ -3,14 +3,21 @@ import "./jobPost.css";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Button from "@mui/material/Button";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function AdminJobPosts() {
-  const [value, setValue] = useState(0);
+  const location = useLocation();
+  const path = location.pathname.split("/").pop();
+
+  const pathToValue = {
+    applicationList: 0,
+    manageJobs: 1,
+  };
+
+  const [value, setValue] = useState(pathToValue[path] || 0);
   const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {

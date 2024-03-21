@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Table, Button, List } from "rsuite";
+import React, { useEffect, useMemo, useState } from "react";
+import { Table } from "rsuite";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
@@ -14,22 +14,27 @@ const ManageApplication = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const jobID = location.state ? location.state.jobId : {};
+  const jobID = useMemo(
+    () => (location.state ? location.state.jobId : ""),
+    [location.state]
+  );
   const [studentData, setStudentData] = useState([]);
 
   useEffect(() => {
     if (jobID) {
       dispatch(getCandidates(jobID));
-
-      if (candidates && candidates.appliedStudents) {
-        const updatedCandidates = candidates.appliedStudents.map((student) => ({
-          ...student,
-          candidate_status: candidates.candidate_status,
-        }));
-        setStudentData(updatedCandidates);
-      }
     }
-  }, [dispatch, jobID, candidates]);
+  }, [dispatch, jobID]);
+
+  useEffect(() => {
+    if (candidates && candidates.appliedStudents) {
+      const updatedCandidates = candidates.appliedStudents.map((student) => ({
+        ...student,
+        candidate_status: candidates.candidate_status,
+      }));
+      setStudentData(updatedCandidates);
+    }
+  }, [candidates]);
 
   const handleBack = () => {
     navigate(-1);

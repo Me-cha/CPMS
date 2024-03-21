@@ -7,9 +7,8 @@ import TaskIcon from "@rsuite/icons/Task";
 import BriefcaseIcon from "@rsuite/icons/legacy/Briefcase";
 import GearIcon from "@rsuite/icons/Gear";
 import AdminIcon from "@rsuite/icons/Admin";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Disclosure } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const SideNavBar = ({ expanded }) => {
   const NavLink = React.memo(
@@ -19,6 +18,9 @@ const SideNavBar = ({ expanded }) => {
       </Link>
     ))
   );
+
+  const location = useLocation();
+  const path = location.pathname.split("/adminHome/")[1];
 
   return (
     <div className="sideNavBar h-[91vh] ">
@@ -45,6 +47,7 @@ const SideNavBar = ({ expanded }) => {
               href="adminDashboard"
               eventKey="1"
               icon={<DashboardIcon />}
+              active={path === "adminDashboard"}
             >
               DASHBOARD
             </Nav.Item>
@@ -53,6 +56,7 @@ const SideNavBar = ({ expanded }) => {
               href="adminJobPosts/applicationList"
               eventKey="2"
               icon={<BriefcaseIcon />}
+              active={path === "adminJobPosts/applicationList"}
             >
               JOBS
             </Nav.Item>
@@ -61,6 +65,7 @@ const SideNavBar = ({ expanded }) => {
               href="adminTrainings/trainingList"
               eventKey="3"
               icon={<TaskIcon />}
+              active={path === "adminTrainings/trainingList"}
             >
               TRAININGS
             </Nav.Item>
@@ -69,6 +74,7 @@ const SideNavBar = ({ expanded }) => {
               href="adminStudentList"
               eventKey="4"
               icon={<GroupIcon />}
+              active={path === "adminStudentList"}
             >
               STUDENTS
             </Nav.Item>
@@ -77,6 +83,7 @@ const SideNavBar = ({ expanded }) => {
               href="coordinatorList"
               eventKey="5"
               icon={<AdminIcon />}
+              active={path === "coordinatorList"}
             >
               COORDINATORS
             </Nav.Item>
@@ -85,6 +92,7 @@ const SideNavBar = ({ expanded }) => {
               href="adminSettings"
               eventKey="6"
               icon={<GearIcon />}
+              active={path === "adminSettings"}
             >
               SETTINGS
             </Nav.Item>
