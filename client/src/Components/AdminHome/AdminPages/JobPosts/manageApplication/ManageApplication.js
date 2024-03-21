@@ -16,17 +16,20 @@ const ManageApplication = () => {
   const location = useLocation();
   const jobID = location.state ? location.state.jobId : {};
   const [studentData, setStudentData] = useState([]);
+
   useEffect(() => {
     if (jobID) {
       dispatch(getCandidates(jobID));
-      const updatedCandidates = candidates.appliedStudents.map((student) => ({
-        ...student,
-        candidate_status: candidates.candidate_status,
-      }));
-      setStudentData(updatedCandidates);
+
+      if (candidates && candidates.appliedStudents) {
+        const updatedCandidates = candidates.appliedStudents.map((student) => ({
+          ...student,
+          candidate_status: candidates.candidate_status,
+        }));
+        setStudentData(updatedCandidates);
+      }
     }
   }, [dispatch, jobID, candidates]);
-  console.log("ap", studentData);
 
   const handleBack = () => {
     navigate(-1);
