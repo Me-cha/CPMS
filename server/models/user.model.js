@@ -55,11 +55,6 @@ trainingApplications: [{
     default: Date.now
   }
 }] ,
-
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 userSchema.pre("save", async function (next) {

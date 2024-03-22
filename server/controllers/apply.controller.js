@@ -129,7 +129,7 @@ const getAppliedStudents = async (req, res) => {
       localField = 'candidates.uid';
     } else if (applicationType === 'training') {
       model = Training;
-      localField = 'applicants';
+      localField = 'attendees.uid';
     } else {
       return res.status(400).json({ success: false, message: "Invalid application type" });
     }
@@ -158,8 +158,6 @@ const getAppliedStudents = async (req, res) => {
             branch: 1,
             college_email: 1,
             avg_cgpa: 1,
-            ssc_marks: 1,
-            hsc_marks: 1,
             resume_url: 1,
             linkedln_link: 1
           }
