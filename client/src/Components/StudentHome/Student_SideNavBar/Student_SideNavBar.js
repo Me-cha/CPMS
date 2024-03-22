@@ -55,7 +55,7 @@ const StudentSideNavBar = ({ expanded }) => {
               href="studentJobPosts/student_applicationList"
               eventKey="2"
               icon={<BriefcaseIcon />}
-              active={path === "studentJobPosts/student_applicationList"}
+              active={path.startsWith("studentJobPosts")}
             >
               JOBS
             </Nav.Item>
@@ -64,7 +64,7 @@ const StudentSideNavBar = ({ expanded }) => {
               href="student_Trainings/student_trainingList"
               eventKey="3"
               icon={<TaskIcon />}
-              active={path === "student_Trainings/student_trainingList"}
+              active={path.startsWith("student_Trainings")}
             >
               TRAININGS
             </Nav.Item>

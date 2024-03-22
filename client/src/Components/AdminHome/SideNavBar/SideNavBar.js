@@ -56,7 +56,7 @@ const SideNavBar = ({ expanded }) => {
               href="adminJobPosts/applicationList"
               eventKey="2"
               icon={<BriefcaseIcon />}
-              active={path === "adminJobPosts/applicationList"}
+              active={path.startsWith("adminJobPosts")}
             >
               JOBS
             </Nav.Item>
@@ -65,7 +65,7 @@ const SideNavBar = ({ expanded }) => {
               href="adminTrainings/trainingList"
               eventKey="3"
               icon={<TaskIcon />}
-              active={path === "adminTrainings/trainingList"}
+              active={path.startsWith("adminTrainings")}
             >
               TRAININGS
             </Nav.Item>

@@ -8,7 +8,7 @@ import Stack from "@mui/material/Stack";
 import logo from "../../../../Logo/cpmsLogo.png";
 import MChip from "@mui/material-next/Chip";
 import Button from "@mui/material/Button";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteJobAction,
@@ -20,9 +20,6 @@ function ApplicationList() {
   const [deleteStatus, setDeleteStatus] = useState(false);
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobActions.jobs);
-
-  const location = useLocation();
-  const job = location.state ? location.state.job : {};
   const navigate = useNavigate();
 
   const handleDelete = (id) => {
@@ -111,32 +108,3 @@ function ApplicationList() {
   );
 }
 export default ApplicationList;
-// href="viewApplication"
-{
-  /* <FormGroup
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-end",
-        }}
-      >
-         <FormControlLabel
-          control={
-            <Checkbox
-              value="eligible"
-              checked={checked}
-              onChange={handleChange}
-              size="small"
-            />
-          }
-          label="Eligible"
-        />
-      </FormGroup> 
-       <Chip
-                size="small"
-                variant="outlined"
-                label={job.eligibility ? "Eligible" : "Non-Eligible"}
-                style={{ marginTop: "5vh" }}
-                color={job.eligibility ? "success" : "error"}
-              /> */
-}
