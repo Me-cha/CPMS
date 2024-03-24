@@ -22,7 +22,7 @@ export default function AdminManageTrainings() {
   };
 
   return (
-    <div className="trainingPost w-[75vw]">
+    <div className="trainingPost w-[75vw]" style={{ margin: "auto" }}>
       <h1 style={{ textAlign: "center", marginBottom: "1vh" }}>
         Manage Training
       </h1>

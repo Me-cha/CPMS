@@ -44,3 +44,24 @@ export const deleteStudentAction =
       dispatch({ type: "DELETE_STUDENT_ERROR", error: error.message });
     }
   };
+
+export const getStudentAction = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${URL}/api/students/getstudents`);
+
+    if (response.status === 200) {
+      dispatch({
+        type: "GET_STUDENT",
+        payload: response.data.studentList,
+      });
+    } else {
+      dispatch({
+        type: "GET_STUDENTS_ERROR",
+        error: "Error fetching students",
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: "GET_STUDENTS_ERROR", error: error.message });
+  }
+};

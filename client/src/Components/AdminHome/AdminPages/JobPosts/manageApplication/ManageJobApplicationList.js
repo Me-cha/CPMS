@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,28 +10,19 @@ import MChip from "@mui/material-next/Chip";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteJobAction,
-  getJobsAction,
-} from "../../../../../redux/action/jobActions";
-import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
+import { getJobsAction } from "../../../../../redux/action/jobActions";
 
-function ApplicationList() {
-  const [deleteStatus, setDeleteStatus] = useState(false);
+function ManageJobs() {
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobActions.jobs);
   const navigate = useNavigate();
 
-  const handleDelete = (id) => {
-    dispatch(deleteJobAction(id, setDeleteStatus));
-  };
-
   useEffect(() => {
     dispatch(getJobsAction());
-  }, [dispatch, deleteStatus]);
+  }, [dispatch]);
 
-  const handleView = (job) => {
-    navigate("/adminHome/updateApplication", { state: { job } });
+  const handleManage = (jobId) => {
+    navigate("/adminHome/manageJobApplication", { state: { jobId } });
   };
 
   return (
@@ -65,16 +56,6 @@ function ApplicationList() {
               subheader={job.company_name}
               style={{ width: "50vw" }}
             />
-            <div>
-              <DeleteTwoToneIcon
-                fontSize="large"
-                color="action"
-                style={{ margin: "3vh 0vw 0vh" }}
-                onClick={() => {
-                  handleDelete(job._id);
-                }}
-              />
-            </div>
           </Stack>
           <CardContent>
             <Stack direction="row" spacing={1}>
@@ -95,10 +76,10 @@ function ApplicationList() {
               <Button
                 variant="outlined"
                 size="small"
-                onClick={() => handleView(job)}
+                onClick={() => handleManage(job._id)}
                 style={{ width: "10vw" }}
               >
-                View
+                Manage
               </Button>
             </Stack>
           </CardContent>
@@ -107,4 +88,4 @@ function ApplicationList() {
     </div>
   );
 }
-export default ApplicationList;
+export default ManageJobs;

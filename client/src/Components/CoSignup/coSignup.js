@@ -93,7 +93,7 @@ export default function CoSignUp() {
         width: "100%",
         height: "100vh",
         padding: "5vh 5vw",
-        backgroundColor: "#2be2b97d",
+        backgroundColor: "#f0f0f0",
       }}
     >
       <Typography

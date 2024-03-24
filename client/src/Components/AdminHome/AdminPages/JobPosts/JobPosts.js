@@ -3,14 +3,21 @@ import "./jobPost.css";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Button from "@mui/material/Button";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function AdminJobPosts() {
-  const [value, setValue] = useState(0);
+  const location = useLocation();
+  const path = location.pathname.split("/").pop();
+
+  const pathToValue = {
+    applicationList: 0,
+    manageJobs: 1,
+  };
+
+  const [value, setValue] = useState(pathToValue[path] || 0);
   const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
@@ -22,10 +29,10 @@ export default function AdminJobPosts() {
   };
 
   return (
-    <div className="jobPost w-[75vw]">
+    <div className="jobPost w-[80vw]" style={{ margin: "auto" }}>
       <h1 style={{ textAlign: "center", marginBottom: "1vh" }}>Job Posts</h1>
       <Box sx={{ bgcolor: "background.paper" }}>
-        <Stack direction="row" spacing={{ md: 108, sm: 40 }}>
+        <Stack direction="row" spacing={{ md: 90, sm: 6 }}>
           <Tabs value={value} onChange={handleChange}>
             <Tab
               label="Applications"
@@ -33,12 +40,12 @@ export default function AdminJobPosts() {
               to="applicationList"
               style={{ textDecoration: "none" }}
             />
-            {/*    <Tab
-          label="New Application"
-            component={Link}
-            to="applicationForm"
-            style={{ textDecoration: "none" }}
-          /> */}
+            <Tab
+              label="Manage Jobs"
+              component={Link}
+              to="manageJobs"
+              style={{ textDecoration: "none" }}
+            />
           </Tabs>
           <Fab
             variant="extended"

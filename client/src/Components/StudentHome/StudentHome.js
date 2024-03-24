@@ -34,10 +34,11 @@ function StudentHome({ isDarkMode, toggleDarkMode, login, setLogin }) {
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
         setLogin={setLogin}
+        toggleMenu={toggleMenu}
       />
       <div className="body">
         <div className="sidenav">
-          <StudentSideNavBar expanded={expanded} toggleMenu={toggleMenu} />
+          <StudentSideNavBar expanded={expanded} />
         </div>
         <div
           className={expanded ? "show-container" : "expanded-show-container"}
