@@ -32,6 +32,7 @@ const StudentList = ({ data, selectedId, setDeleteStatus }) => {
         overflowY: "auto",
         scrollbarWidth: "none",
         msOverflowStyle: "none",
+        margin: "auto",
       }}
     >
       <Table

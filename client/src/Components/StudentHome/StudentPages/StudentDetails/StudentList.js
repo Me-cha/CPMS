@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, List } from "rsuite";
+import { Table } from "rsuite";
 
 const { Column, HeaderCell, Cell } = Table;
 

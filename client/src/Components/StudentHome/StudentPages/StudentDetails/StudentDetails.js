@@ -5,15 +5,14 @@ import SearchBar from "../../../Search/Search";
 import { Header } from "rsuite";
 import { getUsersAction } from "../../../../redux/action/userControls";
 
-function AdminStudentList() {
+function StudentDetails() {
   const dispatch = useDispatch();
   const studentList = useSelector((state) => state.userControls?.students);
   const [selectedId, setSelectedId] = useState([]);
-  const [deleteStatus, setDeleteStatus] = useState(false);
 
   useEffect(() => {
     dispatch(getUsersAction());
-  }, [dispatch, deleteStatus]);
+  }, [dispatch]);
 
   const handleSearch = (record) => {
     setSelectedId((prevIds) => [...prevIds, record]);
@@ -53,13 +52,9 @@ function AdminStudentList() {
           />
         </div>
       </Header>
-      <StudentList
-        data={studentList}
-        selectedId={selectedId}
-        setDeleteStatus={setDeleteStatus}
-      />
+      <StudentList data={studentList} selectedId={selectedId} />
     </div>
   );
 }
 
-export default AdminStudentList;
+export default StudentDetails;

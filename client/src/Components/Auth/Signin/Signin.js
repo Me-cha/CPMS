@@ -1,13 +1,13 @@
 import "./Signin.css";
 import * as yup from "yup";
 import { ErrorMessage, Formik, Form, Field } from "formik";
-import Axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../../redux/action/auth";
+import { Box, Typography } from "@mui/material";
+import clgLogo from "../../Logo/clgLogo.png";
 
 function Signin({ setLogin }) {
   const navigate = useNavigate();
@@ -26,9 +26,13 @@ function Signin({ setLogin }) {
 
   return (
     <div className="LoginBody">
-      <div className="left-login"></div>
-
-      <div className="right-login">
+      <div className="college-name">
+        <img src={clgLogo} style={{ height: "150px" }} />
+        <Typography variant="h4" color={"white"} sx={{ fontWeight: "bold" }}>
+          St. Vincent Palloti College of Engineering and Technology
+        </Typography>
+      </div>
+      <div className="login">
         <div className="card-login">
           <h1>Welcome!!</h1>
           <Formik
@@ -88,8 +92,8 @@ function Signin({ setLogin }) {
             </Form>
           </Formik>
         </div>
+        <ToastContainer position="top-right" />
       </div>
-      <ToastContainer position="top-right" />
     </div>
   );
 }

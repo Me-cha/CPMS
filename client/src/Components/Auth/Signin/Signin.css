@@ -2,35 +2,29 @@
   margin: 0;
   width: 100vw;
   height: 100vh;
-  background: #052159;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../Logo/clgImg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.left-login {
-  width: 50vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
 }
-
-.left-login h1 {
-  color: #77ffc0;
-}
-
-.right-login {
-  width: 50vw;
-  height: 100vh;
+.college-name {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+}
+.login {
+  height: 80vh;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 7vw;
 }
 
 .card-login {
-  width: 60%;
+  width: 30%;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;

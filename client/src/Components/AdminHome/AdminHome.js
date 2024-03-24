@@ -17,8 +17,6 @@ function AdminHome({ isDarkMode, toggleDarkMode, login, setLogin }) {
     if (!login) {
       navigate("/"); // replace '/login' with your actual login path
       alert("Please login to continue");
-    } else {
-      // setisLoggedIn = true;
     }
   }, []);
 
@@ -36,10 +34,11 @@ function AdminHome({ isDarkMode, toggleDarkMode, login, setLogin }) {
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
         setLogin={setLogin}
+        toggleMenu={toggleMenu}
       />
       <div className="body">
         <div className="sidenav">
-          <SideNavBar expanded={expanded} toggleMenu={toggleMenu} />
+          <SideNavBar expanded={expanded} />
         </div>
         <div
           className={expanded ? "show-container" : "expanded-show-container"}
