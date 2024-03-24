@@ -152,7 +152,11 @@ const getAppliedStudents = async (req, res) => {
         $project: {
           _id: 0, 
           company_name: 1,
+          candidates: "$candidates.candidate_status",
+          title:1,
+
           appliedStudents: {
+            uid: 1,
             name: 1,
             batch: 1,
             branch: 1,
