@@ -9,6 +9,4 @@ router.get("/appliedstudents/:applicationType/:id",getAppliedStudents);
 
 
 
-
-
 module.exports = router;
