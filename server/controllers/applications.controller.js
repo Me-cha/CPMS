@@ -15,10 +15,24 @@ const getJobApplications = async (req,res) => {
         }
         res.status(200).json({result: jobApplications.applications, message: "Applications fetched successfully."});
     } catch (error) {
-        console.log(error)
         return res.status(500).json({err: error, message: "Internal Server Error!"});
     }
 
 }
 
-module.exports = {getJobApplications};
+const getTrainingApplications = async(req,res) => {
+    try {
+        const {uid} = req.query;
+        const applications = await User.findOne({uid: uid}).populate('trainingApplications');
+        if(applications.trainingApplications.length === 0)
+        {
+            return res.status(204).json({message: "No applications to view!"});
+        }
+        res.status(200).json({result: applications.trainingApplications, message: "Training applications fetched successfully!"});
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({err: error, message: "Internal Server Error!"});
+    }
+}
+
+module.exports = {getJobApplications,getTrainingApplications};
