@@ -114,34 +114,33 @@ export const updateJobAction = (jobData) => async (dispatch) => {
   }
 };
 
-export const applyJobAction =
-  (uid, jobId) => async (dispatch) => {
-    try {
-      const response = await axios.post(`${URL}/api/application/job/apply`, {
-        uid,
-        job_id: jobId,
+export const applyJobAction = (uid, jobId) => async (dispatch) => {
+  try {
+    const response = await axios.post(`${URL}/api/application/job/apply`, {
+      uid,
+      job_id: jobId,
+    });
+
+    if (response.status === 200) {
+      dispatch({
+        type: "APPLY_JOB",
+        payload: response.data.result,
       });
-
-      if (response.status === 200) {
-        dispatch({
-          type: "APPLY_JOB",
-          payload: response.data.result,
-        });
-        alert("Applied successfully");
-      } else {
-        dispatch({ type: "APPLY_JOB_ERROR", error: response.data.message });
-        alert("try again");
-      }
-    } catch (error) {
-      console.error(error);
-      dispatch({ type: "APPLY_JOB_ERROR", error: error.message });
+      alert("Applied successfully");
+    } else {
+      dispatch({ type: "APPLY_JOB_ERROR", error: response.data.message });
+      alert("try again");
     }
-  };
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: "APPLY_JOB_ERROR", error: error.message });
+  }
+};
 
-export const getCandidates = (jobId) => async (dispatch) => {
+export const getCandidates = (applicationType, jobId) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `${URL}/api/application/job/appliedstudents/${jobId}`
+      `${URL}/api/application/appliedstudents/${applicationType}/${jobId}`
     );
     console.log(response.data);
     if (response.status === 200) {

@@ -7,7 +7,7 @@ import { getCandidates } from "../../../../../redux/action/jobActions";
 
 const { Column, HeaderCell, Cell } = Table;
 
-const ManageApplication = () => {
+const ManageJobApplication = () => {
   const candidates = useSelector(
     (state) => state.jobActions.candidates.appliedStudents
   );
@@ -22,7 +22,7 @@ const ManageApplication = () => {
 
   useEffect(() => {
     if (jobID) {
-      dispatch(getCandidates(jobID));
+      dispatch(getCandidates("job", jobID));
     }
   }, [dispatch, jobID]);
 
@@ -99,4 +99,4 @@ const ManageApplication = () => {
   );
 };
 
-export default ManageApplication;
+export default ManageJobApplication;

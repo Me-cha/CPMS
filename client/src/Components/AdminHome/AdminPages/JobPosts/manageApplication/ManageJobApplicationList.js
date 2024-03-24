@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,17 +8,13 @@ import Stack from "@mui/material/Stack";
 import logo from "../../../../Logo/cpmsLogo.png";
 import MChip from "@mui/material-next/Chip";
 import Button from "@mui/material/Button";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobsAction } from "../../../../../redux/action/jobActions";
-import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 
 function ManageJobs() {
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobActions.jobs);
-
-  const location = useLocation();
-  const job = location.state ? location.state.job : {};
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +22,7 @@ function ManageJobs() {
   }, [dispatch]);
 
   const handleManage = (jobId) => {
-    navigate("/adminHome/manageApplication", { state: { jobId } });
+    navigate("/adminHome/manageJobApplication", { state: { jobId } });
   };
 
   return (

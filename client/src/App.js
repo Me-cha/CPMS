@@ -27,8 +27,8 @@ import ViewApplication from "./Components/StudentHome/StudentPages/JobPosts/View
 import StudentTrainings from "./Components/StudentHome/StudentPages/ManageTraining/StudentTraining";
 import StudentTrainingList from "./Components/StudentHome/StudentPages/ManageTraining/StudentTrainingList/StudentTrainingList";
 import ViewTrainingForm from "./Components/StudentHome/StudentPages/ManageTraining/StudentTraining/ViewTrainingForm";
-import ManageJobs from "./Components/AdminHome/AdminPages/JobPosts/manageApplication/ManageApplicationList";
-import ManageApplication from "./Components/AdminHome/AdminPages/JobPosts/manageApplication/ManageApplication";
+import ManageJobs from "./Components/AdminHome/AdminPages/JobPosts/manageApplication/ManageJobApplicationList";
+import ManageJobApplication from "./Components/AdminHome/AdminPages/JobPosts/manageApplication/ManageJobApplication";
 import StudentDetails from "./Components/StudentHome/StudentPages/StudentDetails/StudentDetails";
 
 function App() {
@@ -113,7 +113,10 @@ function App() {
           </Route>
           <Route path="applicationForm" element={<ApplicationForm />} />
           <Route path="updateApplication" element={<UpdateApplication />} />
-          <Route path="manageApplication" element={<ManageApplication />} />
+          <Route
+            path="manageJobApplication"
+            element={<ManageJobApplication />}
+          />
 
           <Route path="adminStudentList" element={<AdminStudentList />} />
           <Route path="adminTrainings" element={<AdminManageTrainings />}>
