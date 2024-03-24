@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const {getJobApplications,getTrainingApplications} = require('../controllers/applications.controller')
+const {getUserApplications} = require('../controllers/applications.controller')
 
-router.get('/jobs',getJobApplications);
-router.get('/trainings',getTrainingApplications);
+router.get('/:id',getUserApplications);
 
 module.exports = router;

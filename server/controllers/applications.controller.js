@@ -1,38 +1,32 @@
 const User  = require('../models/user.model');
 
-const getJobApplications = async (req,res) => {
-    
+const getUserApplications = async (req, res) => {
     try {
-        const {uid} = req.query;
-    if (!uid) {
-        return res.status(400).json({ message: "uid is missing!" });
-    }
-    
-        const jobApplications = await User.findOne({uid: uid}).populate('applications');
-        if(jobApplications.applications.length === 0)
-        {
-            return res.status(204).json({message: "No Applications to view!"});
+        const userId = req.params.id; 
+        const user = await User.findById(userId);
+        
+        if (!user) {
+            return res.status(404).json({ message: "User not found!" });
         }
-        res.status(200).json({result: jobApplications.applications, message: "Applications fetched successfully."});
-    } catch (error) {
-        return res.status(500).json({err: error, message: "Internal Server Error!"});
-    }
+        
+        const applications = user.applications;
+        const trainingApplications = user.trainingApplications;
 
-}
+        // if (!applications.length) {
+        //     return res.status(204).json({ message: "No job applications to view!" });
+        // }
 
-const getTrainingApplications = async(req,res) => {
-    try {
-        const {uid} = req.query;
-        const applications = await User.findOne({uid: uid}).populate('trainingApplications');
-        if(applications.trainingApplications.length === 0)
-        {
-            return res.status(204).json({message: "No applications to view!"});
-        }
-        res.status(200).json({result: applications.trainingApplications, message: "Training applications fetched successfully!"});
+        // if(!trainingApplications.length)
+        // {
+        //     return res.status(204).json({ message: "No training applications to view!" });
+        // }
+
+        res.status(200).json({ applications, trainingApplications });
     } catch (error) {
-        console.log(error)
-        return res.status(500).json({err: error, message: "Internal Server Error!"});
+        console.log(error);
+        return res.status(500).json({ error, message: "Internal Server Error" });
     }
 }
 
-module.exports = {getJobApplications,getTrainingApplications};
+module.exports = { getUserApplications };
+
