@@ -65,3 +65,23 @@ export const getStudentAction = () => async (dispatch) => {
     dispatch({ type: "GET_STUDENTS_ERROR", error: error.message });
   }
 };
+
+export const getApplicationsAction = (studentId) => async (dispatch) => {
+  try {
+    const response = await axios.get(`${URL}/api/getapplications/${studentId}`);
+    if (response.status === 200) {
+      dispatch({
+        type: "GET_STUDENT_APPLICATIONS",
+        payload: response.data,
+      });
+    } else {
+      dispatch({
+        type: "GET_STUDENTS_ERROR",
+        error: "Error fetching students applications",
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: "GET_STUDENTS_ERROR", error: error.message });
+  }
+};

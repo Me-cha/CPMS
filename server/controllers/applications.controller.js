@@ -12,20 +12,16 @@ const getUserApplications = async (req, res) => {
     const applications = user.applications;
     const trainingApplications = user.trainingApplications;
 
-    if (!applications.length) {
-      return res.status(204).json({
-        message: "No job applications to view!",
-        trainingApplications,
-      });
+    let message = "";
+    if (!applications.length && !trainingApplications.length) {
+      message = "No applications to view!";
+    } else if (!applications.length) {
+      message = "No job applications to view!";
+    } else if (!trainingApplications.length) {
+      message = "No training applications to view!";
     }
 
-    if (!trainingApplications.length) {
-      return res
-        .status(204)
-        .json({ message: "No training applications to view!", applications });
-    }
-
-    res.status(200).json({ applications, trainingApplications });
+    res.status(200).json({ message, applications, trainingApplications });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error, message: "Internal Server Error" });

@@ -1,7 +1,7 @@
-import { LineChart } from "../../../Analytics/LineChart/Line";
+import { LineChart } from "../../Analytics/LineChart/Line";
 import React from "react";
-import { Piechart } from "../../../Analytics/Piechart/Pie";
-import NumberAnalysis from "../../../Analytics/NumericalAnalysis/Number";
+import { Piechart } from "../../Analytics/Piechart/Pie";
+import NumberAnalysis from "../../Analytics/NumericalAnalysis/Number";
 
 function AdminDashboard() {
   return (
