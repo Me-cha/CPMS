@@ -29,6 +29,7 @@ const ViewApplication = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const job = location.state ? location.state.job : {};
+  const isEligible = location.state ? location.state.isEligible : false;
 
   const handleBack = () => {
     navigate(-1);
@@ -344,7 +345,9 @@ const ViewApplication = () => {
           <div>Loading...</div>
         )}
       </div>
-      <ApplyJobPost deadline={job.deadline_date} jobId={job._id} />
+      {isEligible ? (
+        <ApplyJobPost deadline={job.deadline_date} jobId={job._id} />
+      ) : null}
     </div>
   );
 };

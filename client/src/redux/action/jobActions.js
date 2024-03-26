@@ -114,11 +114,12 @@ export const updateJobAction = (jobData) => async (dispatch) => {
   }
 };
 
-export const applyJobAction = (uid, jobId) => async (dispatch) => {
+export const applyAction = (uid, jobId, trainingId) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/api/application/job/apply`, {
       uid,
       job_id: jobId,
+      training_id: trainingId,
     });
 
     if (response.status === 200) {
@@ -127,6 +128,30 @@ export const applyJobAction = (uid, jobId) => async (dispatch) => {
         payload: response.data.result,
       });
       alert("Applied successfully");
+    } else {
+      dispatch({ type: "APPLY_JOB_ERROR", error: response.data.message });
+      alert("try again");
+    }
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: "APPLY_JOB_ERROR", error: error.message });
+  }
+};
+
+export const WithdrawAction = (uid, jobId, trainingId) => async (dispatch) => {
+  try {
+    const response = await axios.post(`${URL}/api/application/job/withdraw`, {
+      uid,
+      job_id: jobId,
+      training_id: trainingId,
+    });
+
+    if (response.status === 200) {
+      dispatch({
+        type: "WITHDRAW_JOB",
+        payload: response.data.result,
+      });
+      alert("Application withdrawn successfully");
     } else {
       dispatch({ type: "APPLY_JOB_ERROR", error: response.data.message });
       alert("try again");

@@ -14,9 +14,9 @@ import {
 } from "../../../../../redux/action/jobActions";
 import { getApplicationsAction } from "../../../../../redux/action/userControls";
 
-function ApplyJobPost({ deadline, jobId }) {
-  const appliedJobs = useSelector(
-    (state) => state.userControls.applications.jobApplications
+function ApplyTraining({ deadline, trainingId }) {
+  const appliedTrainings = useSelector(
+    (state) => state.userControls.applications.trainingApplications
   );
   const user = JSON.parse(localStorage.getItem("Profile"));
   const uid = user?.uid;
@@ -28,18 +28,18 @@ function ApplyJobPost({ deadline, jobId }) {
   }, [dispatch, studentID]);
 
   const handleApply = () => {
-    dispatch(applyAction(uid, jobId)).then(() => {
+    dispatch(applyAction(uid, trainingId)).then(() => {
       dispatch(getApplicationsAction(studentID));
     });
   };
 
   const handleWithdraw = () => {
-    dispatch(WithdrawAction(uid, jobId)).then(() => {
+    dispatch(WithdrawAction(uid, trainingId)).then(() => {
       dispatch(getApplicationsAction(studentID));
     });
   };
 
-  const isApplied = appliedJobs?.some((job) => job.job_id === jobId);
+  const isApplied = appliedTrainings?.some((job) => job.job_id === trainingId);
 
   return (
     <Box className="applyBox" sx={{ placeSelf: "center", ml: 5 }}>
@@ -81,4 +81,4 @@ function ApplyJobPost({ deadline, jobId }) {
     </Box>
   );
 }
-export default ApplyJobPost;
+export default ApplyTraining;

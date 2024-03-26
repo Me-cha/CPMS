@@ -37,6 +37,11 @@ const jobActionReducers = (state = initialState, action) => {
         ...state,
         error: action.error,
       };
+    case "WITHDRAW_JOB":
+      return {
+        ...state,
+        error: action.error,
+      };
     case "APPLY_JOB_ERROR":
       return {
         ...state,
