@@ -12,14 +12,14 @@ const getUserApplications = async (req, res) => {
         const applications = user.applications;
         const trainingApplications = user.trainingApplications;
 
-        // if (!applications.length) {
-        //     return res.status(204).json({ message: "No job applications to view!" });
-        // }
-
-        // if(!trainingApplications.length)
-        // {
-        //     return res.status(204).json({ message: "No training applications to view!" });
-        // }
+        let message = "";
+        if (!applications.length && !trainingApplications.length) {
+          message = "No applications to view!";
+        } else if (!applications.length) {
+          message = "No job applications to view!";
+        } else if (!trainingApplications.length) {
+          message = "No training applications to view!";
+        }
 
         res.status(200).json({ applications, trainingApplications });
     } catch (error) {

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const Jobpost = require("../models/jobPost.model");
 const User = require("../models/user.model");
-const Training = require('../models/training.model')
+const Training = require('../models/training.model');
+
 
 
 const oneClickApply = async (req, res) => {
@@ -83,26 +84,30 @@ const withdrawApply = async (req,res) => {
   const {job_id,uid, training_id} = req.body;
   try {
 
-    if(job_id){
+    if(job_id && uid){
       const jobPost = await Jobpost.findOne({_id: job_id });
+      const student = await User.findOne({uid: uid});
 
-    if (!jobPost) {
-      return res.status(404).json({ error: "Job post not found" });
+    if (!jobPost || !student) {
+      return res.status(404).json({ error: "Data not found" });
     }
 
     jobPost.candidates.splice(jobPost.candidates.map(candidate => candidate.uid).indexOf(uid),1);
+    student.applications.splice(student.applications.map(application=> application.job_id).indexOf(job_id),1)
 
      await jobPost.save();
     }
 
-    if(training_id){
+    if(training_id && uid){
       const training = await Training.findOne({_id: training_id});
+      const student = await User.findOne({uid: uid});
       
-      if (!training) {
-        return res.status(404).json({ error: "Training post not found" });
+      if (!training || !student) {
+        return res.status(404).json({ error: "Data not found" });
       }
 
-    training.attendees.splice(training.attendees.map(attendee => attendee.uid).indexOf(uid),1)
+    training.attendees.splice(training.attendees.map(attendee => attendee.uid).indexOf(uid),1);
+    student.trainingApplications.splice(student.trainingApplications.map(application=> application.training_id).indexOf(training_id),1)
     await training.save();
     }
     
