@@ -28,18 +28,20 @@ function ApplyTraining({ deadline, trainingId }) {
   }, [dispatch, studentID]);
 
   const handleApply = () => {
-    dispatch(applyAction(uid, trainingId)).then(() => {
+    dispatch(applyAction({ uid, jobId: null, trainingId })).then(() => {
       dispatch(getApplicationsAction(studentID));
     });
   };
 
   const handleWithdraw = () => {
-    dispatch(WithdrawAction(uid, trainingId)).then(() => {
+    dispatch(WithdrawAction({ uid, jobId: null, trainingId })).then(() => {
       dispatch(getApplicationsAction(studentID));
     });
   };
 
-  const isApplied = appliedTrainings?.some((job) => job.job_id === trainingId);
+  const isApplied = appliedTrainings?.some(
+    (training) => training.training_id === trainingId
+  );
 
   return (
     <Box className="applyBox" sx={{ placeSelf: "center", ml: 5 }}>

@@ -114,12 +114,12 @@ export const updateJobAction = (jobData) => async (dispatch) => {
   }
 };
 
-export const applyAction = (uid, jobId, trainingId) => async (dispatch) => {
+export const applyAction = (values) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/api/application/job/apply`, {
-      uid,
-      job_id: jobId,
-      training_id: trainingId,
+      uid: values.uid,
+      job_id: values.jobId,
+      training_id: values.trainingId,
     });
 
     if (response.status === 200) {
@@ -138,12 +138,12 @@ export const applyAction = (uid, jobId, trainingId) => async (dispatch) => {
   }
 };
 
-export const WithdrawAction = (uid, jobId, trainingId) => async (dispatch) => {
+export const WithdrawAction = (values) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}/api/application/job/withdraw`, {
-      uid,
-      job_id: jobId,
-      training_id: trainingId,
+      uid: values.uid,
+      job_id: values.jobId,
+      training_id: values.trainingId,
     });
 
     if (response.status === 200) {

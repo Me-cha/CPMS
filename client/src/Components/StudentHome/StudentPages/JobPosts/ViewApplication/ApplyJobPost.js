@@ -28,13 +28,13 @@ function ApplyJobPost({ deadline, jobId }) {
   }, [dispatch, studentID]);
 
   const handleApply = () => {
-    dispatch(applyAction(uid, jobId)).then(() => {
+    dispatch(applyAction({ uid, jobId, training: null })).then(() => {
       dispatch(getApplicationsAction(studentID));
     });
   };
 
   const handleWithdraw = () => {
-    dispatch(WithdrawAction(uid, jobId)).then(() => {
+    dispatch(WithdrawAction({ uid, jobId, training: null })).then(() => {
       dispatch(getApplicationsAction(studentID));
     });
   };
