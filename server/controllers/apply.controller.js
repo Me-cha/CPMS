@@ -93,9 +93,13 @@ const withdrawApply = async (req,res) => {
     }
 
     jobPost.candidates.splice(jobPost.candidates.map(candidate => candidate.uid).indexOf(uid),1);
-    student.applications.splice(student.applications.map(application=> application.job_id).indexOf(job_id),1)
+    const jobIndex = student.applications.findIndex(application => application.job_id.equals(job_id));
+    if (jobIndex !== -1) {
+      student.applications.splice(jobIndex, 1);
+    }
 
      await jobPost.save();
+     await student.save();
     }
 
     if(training_id && uid){
@@ -107,8 +111,14 @@ const withdrawApply = async (req,res) => {
       }
 
     training.attendees.splice(training.attendees.map(attendee => attendee.uid).indexOf(uid),1);
-    student.trainingApplications.splice(student.trainingApplications.map(application=> application.training_id).indexOf(training_id),1)
+    
+    const trainingIndex = student.trainingApplications.findIndex(application => application.training_id.equals(training_id));
+      if (trainingIndex !== -1) {
+        student.trainingApplications.splice(trainingIndex, 1);
+      }
+
     await training.save();
+    await student.save();
     }
     
     res.status(200).json({success: true, message: "Application withdrawn."})
