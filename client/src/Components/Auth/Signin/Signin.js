@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { loginAction } from "../../../redux/action/auth";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import clgLogo from "../../Logo/clgLogo.png";
 
 function Signin({ setLogin }) {
@@ -27,7 +27,7 @@ function Signin({ setLogin }) {
   return (
     <div className="LoginBody">
       <div className="college-name">
-        <img src={clgLogo} style={{ height: "150px" }} />
+        <img src={clgLogo} style={{ height: "150px" }} alt="SVPCET" />
         <Typography variant="h4" color={"white"} sx={{ fontWeight: "bold" }}>
           St. Vincent Palloti College of Engineering and Technology
         </Typography>

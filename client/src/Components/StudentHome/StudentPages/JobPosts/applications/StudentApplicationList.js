@@ -11,31 +11,38 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getJobsAction } from "../../../../../redux/action/jobActions";
+import EligibilityList from "../../../../../Middleware/eligibility/EligibleList";
 
 function StudentApplicationList() {
   const dispatch = useDispatch();
   const jobs = useSelector((state) => state.jobActions.jobs);
   const navigate = useNavigate();
-
+  const eligibilityStatus = EligibilityList();
   useEffect(() => {
     dispatch(getJobsAction());
   }, [dispatch]);
 
   const handleView = (job) => {
-    navigate("/studentHome/student_ViewApplication", { state: { job } });
+    navigate("/studentHome/student_ViewApplication", {
+      state: { job, eligibilityStatus },
+    });
   };
 
-  return (
-    <div
-      className="applicationCards px-[2.5vw] mt-1"
-      style={{
-        maxHeight: "73vh",
-        overflowY: "auto",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-      }}
-    >
-      {jobs.map((job) => (
+  return jobs.map((job) => {
+    const jobEligibility = eligibilityStatus.find(
+      (eligibility) => eligibility.job_id === job._id
+    );
+
+    return (
+      <div
+        className="applicationCards px-[2.5vw] mt-1"
+        style={{
+          maxHeight: "73vh",
+          overflowY: "auto",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+      >
         <Card
           key={job._id}
           sx={{
@@ -56,7 +63,14 @@ function StudentApplicationList() {
               subheader={job.company_name}
               style={{ width: "50vw" }}
             />
-            <div></div>
+            <div style={{ padding: "30px 30px 0px 0px" }}>
+              <Chip
+                color={jobEligibility?.isEligible ? "success" : "error"}
+                variant="outlined"
+                size="small"
+                label={jobEligibility?.isEligible ? "ELIGIBLE" : "NON-ELIGIBLE"}
+              />
+            </div>
           </Stack>
           <CardContent>
             <Stack direction="row" spacing={1}>
@@ -85,8 +99,8 @@ function StudentApplicationList() {
             </Stack>
           </CardContent>
         </Card>
-      ))}
-    </div>
-  );
+      </div>
+    );
+  });
 }
 export default StudentApplicationList;

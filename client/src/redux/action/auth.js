@@ -40,18 +40,38 @@ export const loginAction =
             college_email: response.data.result.college_email,
             uid: response.data.result.uid,
             name: response.data.result.name,
+            eligibility_info: {
+              avg_cgpa: response.data.result.avg_cgpa,
+              hsc_marks: response.data.result.hsc_marks,
+              ssc_marks: response.data.result.ssc_marks,
+              batch: response.data.result.batch,
+              branch: response.data.result.branch,
+            },
           },
         });
         localStorage.setItem(
           "Profile",
-          JSON.stringify({ ...response.data.result })
+          JSON.stringify({
+            _id: response.data.result._id,
+            email: response.data.result.email,
+            college_email: response.data.result.college_email,
+            uid: response.data.result.uid,
+            name: response.data.result.name,
+            eligibility_info: {
+              avg_cgpa: response.data.result.avg_cgpa,
+              hsc_marks: response.data.result.hsc_marks,
+              ssc_marks: response.data.result.ssc_marks,
+              batch: response.data.result.batch,
+              branch: response.data.result.branch,
+            },
+          })
         );
         if (loginCredentials.select === "student") {
           navigate("/studentHome/studentDashboard");
         } else {
           navigate("/adminHome/adminDashboard");
         }
-        return setLogin(true); // Set login status to true
+        return setLogin(true);
       } else {
         dispatch({ type: "AUTH_ERROR", error: "Invalid login credentials" });
         alert("Invalid login credentials");
@@ -65,6 +85,7 @@ export const loginAction =
 
 export const logoutAction = (setLogin, navigate) => async (dispatch) => {
   dispatch({ type: "LOGOUT" });
+  localStorage.clear();
   navigate("/");
   return setLogin(false);
 };
