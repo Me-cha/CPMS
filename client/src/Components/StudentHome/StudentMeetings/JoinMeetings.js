@@ -7,8 +7,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+const JoinMeetingBody = styled("div")({});
+
+const TableMeetingsList = styled("div")({});
+
+const CreateNewMeeting = styled(Card)({});
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,31 +53,37 @@ export default function JoinMeeting() {
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Title</StyledTableCell>
-            <StyledTableCell align="right">Host</StyledTableCell>
-            <StyledTableCell align="right">Join Meet</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
-                {row.Title}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.Host}</StyledTableCell>
-              <StyledTableCell align="right">
-                <Button onClick={handleJoin} variant="contained">
-                  {row.JoinMeet}
-                </Button>
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <JoinMeetingBody>
+      <h1>Join Meetings</h1>
+      <TableMeetingsList>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Title</StyledTableCell>
+                <StyledTableCell align="right">Host Name</StyledTableCell>
+                <StyledTableCell align="right">Join Meet</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.Title}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.Host}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    <Button onClick={handleJoin} variant="contained">
+                      {row.JoinMeet}
+                    </Button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </TableMeetingsList>
+      <CreateNewMeeting></CreateNewMeeting>
+    </JoinMeetingBody>
   );
 }

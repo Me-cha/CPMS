@@ -30,9 +30,9 @@ import ViewTrainingForm from "./Components/StudentHome/StudentPages/ManageTraini
 import ManageJobs from "./Components/AdminHome/AdminPages/JobPosts/manageApplication/ManageJobApplicationList";
 import ManageJobApplication from "./Components/AdminHome/AdminPages/JobPosts/manageApplication/ManageJobApplication";
 import StudentDetails from "./Components/StudentHome/StudentPages/StudentDetails/StudentDetails";
-import { CreateMeeting } from "./Components/VideoConference/CreateMeeting";
 import ManageMeetings from "./Components/AdminHome/AdminPages/AdminManageMeetings/ManageMeetings";
 import JoinMeeting from "./Components/StudentHome/StudentMeetings/JoinMeetings";
+import { VideoConference } from "./Components/VideoConference/VideoConference";
 
 function App() {
   const [isDarkMode, setDarkMode] = useState(() => {
@@ -137,7 +137,7 @@ function App() {
             }
           />
           <Route path="AdminMeetings" element={<ManageMeetings />} />
-          <Route path="jitsiMeeting" element={<CreateMeeting />} />
+          <Route path="jitsiMeeting" element={<VideoConference />} />
           <Route path="adminSettings" element={<AdminSettings />} />
         </Route>
 
