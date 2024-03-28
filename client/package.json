@@ -8,6 +8,7 @@
     "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^1.0.6",
+    "@jitsi/react-sdk": "^1.4.0",
     "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.10",
     "@mui/material-next": "^6.0.0-alpha.123",
