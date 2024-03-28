@@ -197,4 +197,4 @@ const getAppliedStudents = async (req, res) => {
 
 
 
-module.exports = { oneClickApply, withdrawApply, getAppliedStudents};
+module.exports = {oneClickApply, withdrawApply, getAppliedStudents};

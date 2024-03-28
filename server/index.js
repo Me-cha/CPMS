@@ -12,6 +12,7 @@ const training = require("./routes/training.route");
 const coordinator = require("./routes/coordinator.route");
 const apply = require("./routes/apply.route");
 const applications = require('./routes/applications.route');
+const meet = require('./routes/meet.route')
 
 app.use(cors());
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use("/api/training", training);
 app.use("/api/coordinator", coordinator);
 app.use("/api/application", apply);
 app.use("/api/getapplications",applications);
+app.use("/api/meeting",meet);
 
 const Port = process.env.PORT || 8080;
 
