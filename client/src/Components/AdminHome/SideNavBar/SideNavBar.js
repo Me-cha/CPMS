@@ -7,6 +7,7 @@ import TaskIcon from "@rsuite/icons/Task";
 import BriefcaseIcon from "@rsuite/icons/legacy/Briefcase";
 import GearIcon from "@rsuite/icons/Gear";
 import AdminIcon from "@rsuite/icons/Admin";
+import VideoCameraIcon from "@rsuite/icons/legacy/VideoCamera";
 import { Disclosure } from "@headlessui/react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -91,7 +92,7 @@ const SideNavBar = ({ expanded }) => {
               as={NavLink}
               href="AdminMeetings"
               eventKey="6"
-              icon={<AdminIcon />}
+              icon={<VideoCameraIcon />}
               active={path === "AdminMeetings"}
             >
               MEETINGS

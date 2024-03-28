@@ -6,6 +6,7 @@ import GroupIcon from "@rsuite/icons/legacy/Group";
 import TaskIcon from "@rsuite/icons/Task";
 import BriefcaseIcon from "@rsuite/icons/legacy/Briefcase";
 import GearIcon from "@rsuite/icons/Gear";
+import VideoCameraIcon from "@rsuite/icons/legacy/VideoCamera";
 import { Disclosure } from "@headlessui/react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -79,10 +80,19 @@ const StudentSideNavBar = ({ expanded }) => {
             </Nav.Item>
             <Nav.Item
               as={NavLink}
-              href="student_Settings"
-              eventKey="5"
+              href="studentMeetingsList"
+              eventKey="6"
+              icon={<VideoCameraIcon />}
+              active={path === "studentMeetingsList"}
+            >
+              MEETINGS
+            </Nav.Item>
+            <Nav.Item
+              as={NavLink}
+              href="adminSettings"
+              eventKey="7"
               icon={<GearIcon />}
-              active={path === "student_Settings"}
+              active={path === "adminSettings"}
             >
               SETTINGS
             </Nav.Item>
