@@ -89,8 +89,17 @@ const SideNavBar = ({ expanded }) => {
             </Nav.Item>
             <Nav.Item
               as={NavLink}
-              href="adminSettings"
+              href="AdminMeetings"
               eventKey="6"
+              icon={<AdminIcon />}
+              active={path === "AdminMeetings"}
+            >
+              MEETINGS
+            </Nav.Item>
+            <Nav.Item
+              as={NavLink}
+              href="adminSettings"
+              eventKey="7"
               icon={<GearIcon />}
               active={path === "adminSettings"}
             >
